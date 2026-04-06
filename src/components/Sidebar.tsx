@@ -49,7 +49,7 @@ export default function Sidebar({ activeSection, onNavigate, isOpen, onClose }: 
         // Mobile: fixed overlay sidebar — full height
         'fixed md:relative z-40 md:z-auto inset-y-0 left-0 md:inset-auto',
         'md:translate-x-0',
-        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0 max-md:pointer-events-none max-md:invisible',
         collapsed ? 'md:w-16 w-60' : 'w-60'
       )}
     >
