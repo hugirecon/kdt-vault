@@ -22,8 +22,8 @@ export default function UploadModal({ onClose }: UploadModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="glass-card w-full max-w-lg p-6 shadow-2xl shadow-black/40 animate-scale-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-0 sm:p-4">
+      <div className="glass-card w-full h-full sm:h-auto sm:max-w-lg p-4 sm:p-6 shadow-2xl shadow-black/40 animate-scale-in overflow-y-auto mx-0 sm:mx-4 rounded-none sm:rounded-2xl">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-base font-semibold text-white/90">Upload Files</h2>
@@ -80,7 +80,7 @@ export default function UploadModal({ onClose }: UploadModalProps) {
           <label className="text-[10px] font-semibold uppercase tracking-wider text-white/30 block mb-2">
             Classification Level
           </label>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 sm:flex gap-2">
             {(['UNCLASSIFIED', 'CUI', 'CONFIDENTIAL', 'SECRET'] as ClassificationLevel[]).map((level) => (
               <button
                 key={level}
@@ -98,7 +98,7 @@ export default function UploadModal({ onClose }: UploadModalProps) {
         </div>
 
         {/* Options */}
-        <div className="mt-5 grid grid-cols-2 gap-3">
+        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <label className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] cursor-pointer hover:bg-white/[0.04] transition-all">
             <input type="checkbox" defaultChecked className="accent-blue-500" />
             <Lock size={13} className="text-emerald-400/60" />

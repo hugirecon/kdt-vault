@@ -39,7 +39,8 @@ export default function FileList({ files, onFileClick, selectedFile }: FileListP
   );
 
   return (
-    <div className="glass-panel overflow-hidden">
+    <div className="glass-panel overflow-hidden overflow-x-auto">
+      <div className="min-w-[600px]">
       {/* Header row */}
       <div className="grid grid-cols-[1fr_120px_100px_140px_100px] gap-4 px-4 py-2.5 border-b border-white/[0.05]">
         <ColHeader col="name" label="Name" />
@@ -99,6 +100,7 @@ export default function FileList({ files, onFileClick, selectedFile }: FileListP
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

@@ -89,8 +89,11 @@ export default function FileGrid({ files, onFileClick, selectedFile }: FileGridP
         <>
           <div className="fixed inset-0 z-40" onClick={() => setContextMenu(null)} />
           <div
-            className="fixed glass-card p-1.5 shadow-2xl shadow-black/50 z-50 animate-scale-in min-w-[180px]"
-            style={{ left: contextMenu.x, top: contextMenu.y }}
+            className="fixed glass-card p-1.5 shadow-2xl shadow-black/50 z-50 animate-scale-in min-w-[180px] max-w-[calc(100vw-1rem)]"
+            style={{
+              left: Math.min(contextMenu.x, typeof window !== 'undefined' ? window.innerWidth - 200 : contextMenu.x),
+              top: Math.min(contextMenu.y, typeof window !== 'undefined' ? window.innerHeight - 350 : contextMenu.y)
+            }}
           >
             {[
               { label: 'Open', icon: '📂' },

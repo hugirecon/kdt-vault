@@ -22,7 +22,7 @@ export default function AuditLog() {
   return (
     <div className="space-y-4 animate-fade-in">
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
         <div className="relative flex-1 max-w-sm">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
           <input
@@ -62,7 +62,8 @@ export default function AuditLog() {
       </div>
 
       {/* Log entries */}
-      <div className="glass-panel overflow-hidden">
+      <div className="glass-panel overflow-hidden overflow-x-auto">
+        <div className="min-w-[700px]">
         {/* Header */}
         <div className="grid grid-cols-[140px_130px_100px_1fr_120px_100px] gap-3 px-4 py-2.5 border-b border-white/[0.05]">
           {['Timestamp', 'User', 'Action', 'Target', 'Classification', 'IP Address'].map((h) => (
@@ -107,6 +108,7 @@ export default function AuditLog() {
         {filtered.length === 0 && (
           <div className="text-center py-12 text-white/25 text-sm">No matching audit entries</div>
         )}
+        </div>
       </div>
 
       {/* Summary */}

@@ -22,7 +22,8 @@ export default function TrashView() {
       </div>
 
       {/* Trash items */}
-      <div className="glass-panel overflow-hidden">
+      <div className="glass-panel overflow-hidden overflow-x-auto">
+        <div className="min-w-[700px]">
         <div className="grid grid-cols-[1fr_120px_120px_140px_120px] gap-4 px-4 py-2.5 border-b border-white/[0.05]">
           {['Name', 'Classification', 'Deleted By', 'Deleted', 'Auto-Delete'].map(h => (
             <span key={h} className="text-[10px] font-semibold uppercase tracking-wider text-white/25">{h}</span>
@@ -57,6 +58,7 @@ export default function TrashView() {
               </div>
             );
           })}
+        </div>
         </div>
       </div>
 

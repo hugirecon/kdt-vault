@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Search, Bell, Upload, LayoutGrid, List, Filter, X } from 'lucide-react';
+import { Search, Bell, Upload, LayoutGrid, List, Filter, X, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ViewMode, ClassificationLevel } from '@/lib/types';
 import { mockNotifications, currentUser } from '@/lib/mock-data';
@@ -14,6 +14,7 @@ interface HeaderProps {
   onSearchChange: (query: string) => void;
   onUploadClick: () => void;
   title: string;
+  onMenuClick?: () => void;
 }
 
 export default function Header({
@@ -23,6 +24,7 @@ export default function Header({
   onSearchChange,
   onUploadClick,
   title,
+  onMenuClick,
 }: HeaderProps) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -40,9 +42,19 @@ export default function Header({
   }, []);
 
   return (
-    <header className="h-16 border-b border-white/[0.06] bg-white/[0.02] backdrop-blur-xl flex items-center justify-between px-6 gap-4">
-      {/* Title */}
-      <h1 className="text-lg font-semibold text-white/90 shrink-0">{title}</h1>
+    <header className="h-16 border-b border-white/[0.06] bg-white/[0.02] backdrop-blur-xl flex items-center justify-between px-3 md:px-6 gap-2 md:gap-4">
+      {/* Hamburger + Title */}
+      <div className="flex items-center gap-2 shrink-0">
+        {onMenuClick && (
+          <button
+            onClick={onMenuClick}
+            className="md:hidden p-2 rounded-lg text-white/50 hover:text-white/80 hover:bg-white/[0.04] transition-all"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+        <h1 className="text-base md:text-lg font-semibold text-white/90 hidden sm:block">{title}</h1>
+      </div>
 
       {/* Search */}
       <div className="flex-1 max-w-xl">
@@ -67,9 +79,9 @@ export default function Header({
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2">
-        {/* View toggle */}
-        <div className="flex items-center bg-white/[0.04] rounded-lg border border-white/[0.06] p-0.5">
+      <div className="flex items-center gap-1.5 md:gap-2">
+        {/* View toggle - hidden on mobile */}
+        <div className="hidden md:flex items-center bg-white/[0.04] rounded-lg border border-white/[0.06] p-0.5">
           <button
             onClick={() => onViewModeChange('grid')}
             className={cn(
@@ -93,10 +105,10 @@ export default function Header({
         {/* Upload */}
         <button
           onClick={onUploadClick}
-          className="flex items-center gap-2 px-3.5 py-1.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg text-sm font-medium hover:bg-blue-500/30 transition-all duration-200"
+          className="flex items-center gap-2 px-2.5 md:px-3.5 py-1.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg text-sm font-medium hover:bg-blue-500/30 transition-all duration-200"
         >
           <Upload size={14} />
-          <span>Upload</span>
+          <span className="hidden md:inline">Upload</span>
         </button>
 
         {/* Notifications */}
@@ -143,9 +155,9 @@ export default function Header({
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setShowProfile(!showProfile)}
-            className="flex items-center gap-2.5 pl-3 pr-1 py-1 rounded-xl hover:bg-white/[0.04] transition-all duration-200"
+            className="flex items-center gap-2.5 pl-1 md:pl-3 pr-1 py-1 rounded-xl hover:bg-white/[0.04] transition-all duration-200"
           >
-            <div>
+            <div className="hidden md:block">
               <div className="text-xs font-medium text-white/80 text-right">{currentUser.name}</div>
               <div className="text-[10px] text-white/40 text-right">{currentUser.role}</div>
             </div>

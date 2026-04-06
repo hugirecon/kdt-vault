@@ -14,16 +14,24 @@ interface DetailPanelProps {
 
 export default function DetailPanel({ file, onClose }: DetailPanelProps) {
   return (
-    <div className="w-80 border-l border-white/[0.06] bg-white/[0.02] backdrop-blur-xl overflow-y-auto animate-slide-in-right">
+    <>
+    {/* Mobile overlay backdrop */}
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={onClose} />
+    <div className={cn(
+      'border-l border-white/[0.06] bg-white/[0.02] backdrop-blur-xl overflow-y-auto animate-slide-in-right',
+      // Mobile: full-screen overlay
+      'fixed inset-0 z-50 w-full md:relative md:inset-auto md:z-auto md:w-80'
+    )}>
       {/* Header */}
       <div className="p-4 border-b border-white/[0.06]">
         <div className="flex items-start justify-between mb-3">
           <div className="text-3xl">{fileTypeIcon(file.type).icon}</div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-all"
+            className="p-2 md:p-1 rounded-lg text-white/50 md:text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-all"
           >
-            <X size={16} />
+            <X size={20} className="md:hidden" />
+            <X size={16} className="hidden md:block" />
           </button>
         </div>
         <h3 className="text-sm font-semibold text-white/90 leading-snug mb-2">{file.name}</h3>
@@ -179,5 +187,6 @@ export default function DetailPanel({ file, onClose }: DetailPanelProps) {
         </div>
       </div>
     </div>
+    </>
   );
 }
