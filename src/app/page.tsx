@@ -77,11 +77,11 @@ export default function Home() {
   const showViewToggle = isFileView;
 
   return (
-    <div className="flex h-screen overflow-hidden relative">
+    <div className="flex h-screen h-[100dvh] overflow-hidden relative">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

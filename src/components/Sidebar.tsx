@@ -45,9 +45,9 @@ export default function Sidebar({ activeSection, onNavigate, isOpen, onClose }: 
   return (
     <aside
       className={cn(
-        'flex flex-col h-full border-r border-white/[0.06] bg-white/[0.02] backdrop-blur-xl transition-all duration-300',
-        // Mobile: fixed overlay sidebar
-        'fixed md:relative z-40 md:z-auto',
+        'flex flex-col h-full border-r border-white/[0.06] bg-[#0a0a12] md:bg-white/[0.02] backdrop-blur-xl transition-all duration-300',
+        // Mobile: fixed overlay sidebar — full height
+        'fixed md:relative z-40 md:z-auto inset-y-0 left-0 md:inset-auto',
         'md:translate-x-0',
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
         collapsed ? 'md:w-16 w-60' : 'w-60'
