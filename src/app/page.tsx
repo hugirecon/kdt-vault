@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { NavSection, ViewMode, FileItem } from '@/lib/types';
 import { mockFiles, starredFiles, recentFiles, folders, documents } from '@/lib/mock-data';
-import Sidebar from '@/components/Sidebar';
+import Sidebar, { MobileSidebar } from '@/components/Sidebar';
 import Header from '@/components/Header';
 import FileGrid from '@/components/FileGrid';
 import FileList from '@/components/FileList';
@@ -35,19 +35,15 @@ export default function Home() {
   const [selectedFile, setSelectedFile] = useState<FileItem | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Close sidebar on route change for mobile
   const handleNavigate = (s: NavSection) => {
     setActiveSection(s);
     setSelectedFile(null);
-    setSidebarOpen(false);
   };
 
   const handleFileClick = (file: FileItem) => {
     setSelectedFile(selectedFile?.id === file.id ? null : file);
-    // Close sidebar on mobile when clicking a file
-    setSidebarOpen(false);
   };
 
   const getFilesForSection = (): FileItem[] => {
@@ -74,24 +70,20 @@ export default function Home() {
   const displayFiles = useMemo(() => getFilesForSection(), [activeSection, searchQuery]);
 
   const isFileView = ['my-files', 'shared', 'recent', 'starred'].includes(activeSection);
-  const showViewToggle = isFileView;
 
   return (
-    <div className="flex h-screen h-[100dvh] overflow-hidden relative">
-      {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
-          onClick={() => setSidebarOpen(false)}
+    <div className="flex h-screen h-[100dvh] overflow-hidden">
+      {/* Desktop sidebar — always visible on md+ */}
+      <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
+
+      {/* Mobile sidebar — only rendered when open */}
+      {mobileMenuOpen && (
+        <MobileSidebar
+          activeSection={activeSection}
+          onNavigate={handleNavigate}
+          onClose={() => setMobileMenuOpen(false)}
         />
       )}
-
-      <Sidebar
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header
@@ -101,11 +93,11 @@ export default function Home() {
           onSearchChange={setSearchQuery}
           onUploadClick={() => setShowUpload(true)}
           title={sectionTitles[activeSection]}
-          onMenuClick={() => setSidebarOpen(true)}
+          onMenuClick={() => setMobileMenuOpen(true)}
         />
 
         <div className="flex-1 flex overflow-hidden">
-          <main className="flex-1 overflow-y-auto p-6">
+          <main className="flex-1 overflow-y-auto p-4 md:p-6">
             {/* Breadcrumb for file views */}
             {isFileView && (
               <div className="flex items-center gap-2 text-[11px] text-white/30 mb-5">

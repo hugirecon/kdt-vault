@@ -47,7 +47,8 @@ export default function Header({
       <div className="flex items-center gap-2 shrink-0">
         {onMenuClick && (
           <button
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onMenuClick(); }}
+            onClick={() => onMenuClick()}
+            onTouchEnd={(e) => { e.preventDefault(); onMenuClick(); }}
             className="md:hidden p-3 -m-1 rounded-lg text-white/70 hover:text-white/90 hover:bg-white/[0.06] active:bg-white/[0.1] transition-all touch-manipulation relative z-50"
             aria-label="Open menu"
             type="button"
