@@ -48,11 +48,11 @@ export default function Header({
         {onMenuClick && (
           <button
             onClick={() => onMenuClick()}
-            className="md:hidden p-3 -m-1 rounded-lg text-white/70 hover:text-white/90 hover:bg-white/[0.06] active:bg-white/[0.1] transition-all touch-manipulation relative z-50"
+            className="md:hidden flex items-center justify-center w-12 h-12 rounded-xl text-white/80 hover:text-white active:bg-white/[0.1] transition-all touch-manipulation relative z-50"
             aria-label="Open menu"
             type="button"
           >
-            <Menu size={24} />
+            <Menu size={28} />
           </button>
         )}
         <h1 className="text-base md:text-lg font-semibold text-white/90 hidden sm:block">{title}</h1>
