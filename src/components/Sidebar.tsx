@@ -158,7 +158,6 @@ export function MobileSidebar({ activeSection, onNavigate, onClose }: MobileSide
       <div
         className="absolute inset-0 bg-black/70"
         onClick={onClose}
-        onTouchEnd={(e) => { e.preventDefault(); onClose(); }}
       />
 
       {/* Drawer */}
@@ -174,7 +173,6 @@ export function MobileSidebar({ activeSection, onNavigate, onClose }: MobileSide
           </div>
           <button
             onClick={onClose}
-            onTouchEnd={(e) => { e.preventDefault(); onClose(); }}
             className="p-2 rounded-lg text-white/50 hover:text-white/80 active:bg-white/[0.1] touch-manipulation"
             type="button"
           >
